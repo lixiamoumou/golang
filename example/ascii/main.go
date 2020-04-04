@@ -49,7 +49,7 @@ var arr []Ascci = []Ascci{
 
 //func Getmax(s []Ascci) int{
 //	max := 0
-//	for _, v := range s{
+//	05for _, v := range s{
 //		length := len(k) + len(v.Symble) + len(v.Description) +
 //			len(strconv.FormatInt(int64(v.Dec), 16)) + 3 * 2
 //		if length >= max {
@@ -67,7 +67,7 @@ func ShowAscci() {
 
 	//print title
 	for col = 0; col < 4; col++ {
-		if (col == 0) {
+		if col == 0 {
 			fmt.Printf(title1)
 		} else {
 			fmt.Printf(title2)
@@ -85,7 +85,7 @@ func ShowAscci() {
 					arr[row].Symble, arr[row].Description)
 				buf.Write([]byte(s))
 				if len(s) < len(title1) {
-					space := make([]byte, len(title1) - len(s))
+					space := make([]byte, len(title1)-len(s))
 					buf.Write([]byte(space))
 				}
 
@@ -93,8 +93,8 @@ func ShowAscci() {
 				num := col*32 + row
 				s := fmt.Sprintf("| %-3d  %02[1]x  %2[1]c", num)
 				buf.Write([]byte(s))
-				if len(s) < len(title2){
-					space := make([]byte, len(title2) - len(s))
+				if len(s) < len(title2) {
+					space := make([]byte, len(title2)-len(s))
 					buf.Write([]byte(space))
 				}
 			}

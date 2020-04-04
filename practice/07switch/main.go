@@ -5,10 +5,10 @@ import (
 	"time"
 )
 
-func main(){
+func main() {
 	i := 2
 	fmt.Print("write ", i, " as ")
-	switch i{
+	switch i {
 	case 1:
 		fmt.Println("one")
 	case 2:
@@ -32,7 +32,7 @@ func main(){
 		fmt.Println("It's after noon")
 	}
 
-	whatAmI := func(i interface{}){
+	whatAmI := func(i interface{}) {
 		switch t := i.(type) {
 		case bool:
 			fmt.Println("I'm a bool")
@@ -46,4 +46,3 @@ func main(){
 	whatAmI(1)
 	whatAmI("hey")
 }
-
