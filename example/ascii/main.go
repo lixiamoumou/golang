@@ -62,8 +62,8 @@ var arr []Ascci = []Ascci{
 func ShowAscci() {
 	var col, row int
 	//Dec  Hex  Symble-16 __Des-28
-	title1 := " Dec  Hex  Symble  Description          "
-	title2 := " Dec  Hex  Char "
+	title1 := "Dec  Hex  Symble  Description          "
+	title2 := "  Dec  Hex  Char "
 
 	//print title
 	for col = 0; col < 4; col++ {
@@ -85,7 +85,7 @@ func ShowAscci() {
 					arr[row].Symble, arr[row].Description)
 				buf.Write([]byte(s))
 				if len(s) < len(title1) {
-					space := make([]byte, len(title1)-len(s))
+					space := make([]byte, len(title1)-len(s)+1)
 					buf.Write([]byte(space))
 				}
 
