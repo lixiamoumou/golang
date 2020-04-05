@@ -22,8 +22,10 @@ func main() {
 	delete(m, "k2")
 	fmt.Println("del k2: ", m)
 
-	_, prs := m["k2"]
-	fmt.Println("prs: ", prs)
+	_, prs2 := m["k2"]
+	k1, prs1 := m["k3"]
+	fmt.Println("prs2: ", prs2)
+	fmt.Println("k1: ", k1, "prs2: ", prs1)
 
 	m2 := map[string]int{"one": 1, "two": 2}
 	fmt.Println("m2: ", m2)
