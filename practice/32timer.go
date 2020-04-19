@@ -29,4 +29,9 @@ func main() {
 	if stop2 {
 		fmt.Println("timer2 is stop, ", duration3)
 	}
+
+	starttime3 := time.Now()
+	time.Sleep(3 * time.Second)
+	duration4 := time.Since(starttime3)
+	fmt.Println("timer3 is sleep, ", duration4)
 }
