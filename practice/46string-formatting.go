@@ -33,6 +33,7 @@ func main() {
 
 	fmt.Printf("%s\n", "\"string\"")
 	fmt.Printf("%q\n", "\"string\"")
+	fmt.Printf("%s\n", "string")
 
 	fmt.Printf("%x\n", "h")
 
