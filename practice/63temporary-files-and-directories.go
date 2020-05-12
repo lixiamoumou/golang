@@ -28,10 +28,9 @@ func main() {
 	check(err)
 
 	fmt.Println("Temp file name:", f.Name())
-
-	// 删除不了？？？
 	defer os.Remove(f.Name())
 
 	_, err = f.Write([]byte{1, 2, 3, 4})
 	check(err)
+	defer f.Close()
 }
