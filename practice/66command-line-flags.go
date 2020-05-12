@@ -21,3 +21,11 @@ func main() {
 	fmt.Println("svar:", svar)
 	fmt.Println("tail:", flag.Args())
 }
+
+//执行命令
+//./66command-line-flags -wat
+//./66command-line-flags -h
+//./66command-line-flags -word=opt a1 a2 a3 -numb=7
+//./66command-line-flags -word=opt a1 a2 a3
+//./66command-line-flags -word=opt
+//./66command-line-flags -word=opt -numb=7 -fork -svar=flag
