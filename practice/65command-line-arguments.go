@@ -16,3 +16,7 @@ func main() {
 	fmt.Println(argWithoutProg)
 	fmt.Println(arg)
 }
+
+//先go build
+//$ go build command-line-arguments.go
+//$ ./command-line-arguments a b c d

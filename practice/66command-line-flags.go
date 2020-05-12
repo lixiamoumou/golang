@@ -23,6 +23,7 @@ func main() {
 }
 
 //执行命令
+//先go build
 //./66command-line-flags -wat
 //./66command-line-flags -h
 //./66command-line-flags -word=opt a1 a2 a3 -numb=7
