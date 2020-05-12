@@ -1,27 +1,28 @@
 package main
 
-import(
+import (
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 )
 
-func check(err error){
-	if err != nil{
+func check(err error) {
+	if err != nil {
 		panic(err)
 	}
 }
 
-func main()  {
+func main() {
 	f, err := ioutil.TempFile("D:\\code\\Go", "sample")
 	check(err)
 	fmt.Println("temp file name: ", f.Name())
-	//defer os.Remove(f.Name())
-	err = os.Remove(f.Name())
-	fmt.Println(err)
+	defer os.Remove(f.Name())
+	//err = os.Remove(f.Name())
+	//fmt.Println(err)
 
-	_,err = f.Write([]byte{1,2,3,4})
+	_, err = f.Write([]byte{1, 2, 3, 4})
+	defer f.Close()
 	check(err)
 
 	dname, err := ioutil.TempDir("D:\\code\\Go", "sampledir")
@@ -30,6 +31,6 @@ func main()  {
 	defer os.RemoveAll(dname)
 
 	fname := filepath.Join(dname, "file1")
-	err = ioutil.WriteFile(fname, []byte{1,2}, 0666)
+	err = ioutil.WriteFile(fname, []byte{1, 2}, 0666)
 	check(err)
 }
