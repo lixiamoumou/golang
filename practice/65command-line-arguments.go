@@ -7,6 +7,7 @@ import (
 
 func main() {
 
+	//切片中的第一个参数是该程序的路径， 而 os.Args[1:]保存了程序全部的参数
 	argWithProg := os.Args
 	argWithoutProg := os.Args[1:]
 
