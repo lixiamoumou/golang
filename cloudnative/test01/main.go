@@ -1,9 +1,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"github.com/golang/glog"
+	//"github.com/golang/glog"
 	"io"
 	"log"
 	"net/http"
@@ -43,9 +42,10 @@ func healthz(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	flag.Set("v", "4")
+	//flag.Set("v", "4")
 	//flag.Parse()
-	glog.V(0).Info("Starting http server...")
+	//glog.V(0).Info("Starting http server...")
+	fmt.Println("Starting http server...")
 	http.HandleFunc("/", indexHandle)
 	http.HandleFunc("/version", versionHandle)
 	http.HandleFunc("/healthz", healthz)
