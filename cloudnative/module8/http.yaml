@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: httpserver
+  name: httpserver
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: httpserver
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: httpserver
+    spec:
+      containers:
+        - image: httpserver
+          name: httpserver
+          imagePullPolicy: IfNotPresent
+          livenessProbe:  
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+          readinessProbe: 
+            httpGet:
+              path: /healthz
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 5
+          resources:  
+            limits:
+              cpu: "200m"
+              memory: "100Mi"
+            requests:
+              cpu: "20m"
+              memory: "20Mi"
+          env:  
+            - name: httpport
+              valueFrom:
+                configMapKeyRef:
+                  name: myenv
+                  key: httpport
