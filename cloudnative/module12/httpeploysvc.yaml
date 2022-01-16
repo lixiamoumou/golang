@@ -1,0 +1,97 @@
+# deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: http-deploy
+  name: http-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+        app: http 
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+      labels:
+        app: http
+    spec:
+      containers:
+      - name: http
+        image: httpserver
+        ports:
+          - containerPort: 8080
+        volumeMounts:
+          - name: server-config
+            mountPath: "/etc/server"
+            readOnly: true
+        lifecycle:
+          postStart:
+            exec:
+              command: ["cat", "./http.yaml"]    
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 1
+          timeoutSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 1
+          timeoutSeconds: 3
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 3
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "250m"
+            memory: "250Mi"
+      volumes:
+        - name: server-config
+          configMap:
+            name: server-config
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 5
+
+---
+# service 
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: http-svc
+  name: http-svc
+  namespace: https
+spec:
+  selector:
+    app: http
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
