@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: httpserver
+  name: httpserver-prom
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpserver
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: httpserver
+      annotations:
+        prometheus.io/port: "8080"
+        prometheus.io/scrape: "true"
+    spec:
+      containers:
+      - image: httpserver:v5
+        name: httpserver
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
