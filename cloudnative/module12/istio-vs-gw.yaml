@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: http-vs
+spec:
+  gateways:
+    - http-gw
+  hosts:
+    - http.com
+  http:
+    - match:
+        - port: 443
+      route:
+        - destination:
+            host: http-svc.https.svc.cluster.local
+            port:
+              number: 8080
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: http-gw
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - hosts:
+        - www.httpserver.com
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        mode: SIMPLE
+        credentialName: http-credential
